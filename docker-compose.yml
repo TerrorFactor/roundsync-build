@@ -1,0 +1,15 @@
+services:
+  apk-builder:
+    build: .
+    volumes:
+      # Mount current directory strictly for exporting the final APK
+      - .:/host_mount
+      # Keep the heavy lifting (downloads & compilation) inside Docker volumes
+      - gradle-cache:/root/.gradle
+      - android-ndk-cache:/opt/android-sdk/ndk
+      - go-cache:/root/go
+
+volumes:
+  gradle-cache:
+  android-ndk-cache:
+  go-cache:
